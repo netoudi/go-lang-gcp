@@ -1,0 +1,11 @@
+steps:
+  - id: "Running test"
+    name: "gcr.io/cloud-builders/go"
+    args: ["test", "calc", "-count=1"]
+    env: ["GOPATH=."]
+
+  - id: "Docker build"
+    name: "gcr.io/cloud-builders/docker"
+    args: ["build", "--tag=gcr.io/$PROJECT_ID/gocalc", "."]
+
+images: ["gcr.io/$PROJECT_ID/gocalc"]
