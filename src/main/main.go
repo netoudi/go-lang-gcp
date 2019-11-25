@@ -2,9 +2,14 @@ package main
 
 import (
   "fmt"
-  "calc"
+  "net/http"
+  "welcome"
 )
 
 func main() {
-  fmt.Println("5 + 5 =", calc.Sum(5, 5))
+  http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+    fmt.Fprintf(writer, welcome.Greeting("Code.education Rocks!"))
+  })
+
+  fmt.Println(http.ListenAndServe(":8000", nil))
 }
